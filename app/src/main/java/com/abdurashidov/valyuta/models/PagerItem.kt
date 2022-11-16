@@ -1,0 +1,1 @@
+package com.abdurashidov.valyuta.modelsdata class PagerItem(    var type:String)
