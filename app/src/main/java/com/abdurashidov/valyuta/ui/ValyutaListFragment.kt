@@ -16,6 +16,7 @@ import com.abdurashidov.valyuta.adapters.UserAdapter
 import com.abdurashidov.valyuta.databinding.ActivityMainBinding
 import com.abdurashidov.valyuta.databinding.BottomsheetDialogBinding
 import com.abdurashidov.valyuta.databinding.FragmentValyutaListBinding
+import com.abdurashidov.valyuta.models.MyObject
 import com.abdurashidov.valyuta.models.Valyuta
 import com.android.volley.Request.Method.GET
 import com.android.volley.RequestQueue
@@ -33,7 +34,6 @@ class ValyutaListFragment : Fragment(), UserAdapter.RvClick {
     private lateinit var binding: FragmentValyutaListBinding
     private lateinit var list: List<Valyuta>
     private lateinit var requestQueue: RequestQueue
-    private lateinit var userAdapter: UserAdapter
     val url = "http://cbu.uz/uzc/arkhiv-kursov-valyut/json/"
 
     override fun onCreateView(
@@ -58,11 +58,13 @@ class ValyutaListFragment : Fragment(), UserAdapter.RvClick {
 
     inner class MyAsyncTask : AsyncTask<Void, Void, Void>() {
 
+        @Deprecated("Deprecated in Java")
         override fun onPreExecute() {
             super.onPreExecute()
             binding.myProgress.visibility=View.VISIBLE
         }
 
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Void?): Void? {
             val jsonArrayRequest = JsonArrayRequest(GET, url, null,
                 object : Response.Listener<JSONArray> {
@@ -70,8 +72,9 @@ class ValyutaListFragment : Fragment(), UserAdapter.RvClick {
 
                         val type = object : TypeToken<List<Valyuta>>() {}.type
                         list = Gson().fromJson<List<Valyuta>>(response.toString(), type)
-                        userAdapter = UserAdapter(list, this@ValyutaListFragment)
-                        binding.rv.adapter = userAdapter
+                        MyObject.userAdapter=UserAdapter(list, this@ValyutaListFragment)
+                        binding.rv.adapter = MyObject.userAdapter
+                        MyObject.list.addAll(list)
                     }
                 }, object : Response.ErrorListener {
                     override fun onErrorResponse(error: VolleyError?) {
