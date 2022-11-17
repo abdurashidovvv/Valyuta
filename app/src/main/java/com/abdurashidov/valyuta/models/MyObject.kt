@@ -1,0 +1,1 @@
+package com.abdurashidov.valyuta.modelsimport com.abdurashidov.valyuta.adapters.UserAdapterobject MyObject {    var list=ArrayList<Valyuta>()    var userAdapter: UserAdapter?=null}
