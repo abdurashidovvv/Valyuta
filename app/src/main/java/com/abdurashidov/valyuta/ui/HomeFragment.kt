@@ -1,5 +1,6 @@
 package com.abdurashidov.valyuta.ui
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -70,10 +71,11 @@ class HomeFragment : Fragment() {
         return binding.root
     }
 
+    @SuppressLint("DefaultLocale")
     private fun filterList(newText: String?) {
         filteredList=ArrayList()
         for (i in MyObject.list) {
-            if (i.CcyNm_UZ!!.toLowerCase().contains(newText!!.toLowerCase())){
+            if (i.CcyNm_UZ.toLowerCase().contains(newText!!.toLowerCase())){
                 filteredList.add(i)
             }
         }

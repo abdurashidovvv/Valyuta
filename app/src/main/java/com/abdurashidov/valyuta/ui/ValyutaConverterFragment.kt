@@ -169,6 +169,7 @@ class ValyutaConverterFragment : Fragment() {
         return binding.root
     }
     inner class MyAsyncTask: AsyncTask<Void, Void, Void>(){
+        @Deprecated("Deprecated in Java")
         override fun doInBackground(vararg params: Void?): Void? {
 
             val jsonArrayRequest = JsonArrayRequest(
